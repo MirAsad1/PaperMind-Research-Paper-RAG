@@ -28,7 +28,7 @@ PDFs → PyMuPDF → Text Chunks → Embeddings → ChromaDB
                                                  ↓
 User Query → Embed Query → Similarity Search → Top 5 Chunks
                                                  ↓
-                              Groq LLM (Llama 3) → Answer
+                                        Groq LLM (Llama 3) → Answer
 ```
 
 ---
