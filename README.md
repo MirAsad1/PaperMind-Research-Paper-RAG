@@ -1,4 +1,4 @@
-# 📄 Research Paper Q&A — RAG System
+# 📄 PaperMind - Research Paper Q&A — RAG System
 
 A Retrieval-Augmented Generation (RAG) application that lets you ask questions about research papers in natural language. Built with LangChain, ChromaDB, and Groq LLM.
 
@@ -57,7 +57,7 @@ research-rag/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/research-rag.git
+git clone https://github.com/MirAsad1/PaperMind-Research-Paper-RAG.git
 cd research-rag
 ```
 
