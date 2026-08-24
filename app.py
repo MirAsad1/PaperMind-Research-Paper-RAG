@@ -85,26 +85,26 @@ if prompt := st.chat_input("Ask a question about the research papers..."):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-        with st.chat_message("assistant"):
-            with st.spinner("Searching papers..."):
-                docs = chain["retriever"].invoke(prompt)
-                context = "\n\n".join(doc.page_content for doc in docs)
-                formatted_prompt = chain["prompt"].format(context=context, question=prompt)
+    with st.chat_message("assistant"):
+        with st.spinner("Searching papers..."):
+            docs = chain["retriever"].invoke(prompt)
+            context = "\n\n".join(doc.page_content for doc in docs)
+            formatted_prompt = chain["prompt"].format(context=context, question=prompt)
 
-            def stream_response():
-                for chunk in chain["llm"].stream(formatted_prompt):
-                    yield chunk.content
+        def stream_response():
+            for chunk in chain["llm"].stream(formatted_prompt):
+                yield chunk.content
 
-            answer = st.write_stream(stream_response)
+        answer = st.write_stream(stream_response)
 
-            with st.expander("📚 Sources"):
-                seen = set()
-                for doc in docs:
-                    source = doc.metadata.get("source", "Unknown")
-                    page = doc.metadata.get("page", "?")
-                    key = f"{source}-{page}"
-                    if key not in seen:
-                        seen.add(key)
-                        st.markdown(f"- **{source}** — Page {page}")
+        with st.expander("📚 Sources"):
+            seen = set()
+            for doc in docs:
+                source = doc.metadata.get("source", "Unknown")
+                page = doc.metadata.get("page", "?")
+                key = f"{source}-{page}"
+                if key not in seen:
+                    seen.add(key)
+                    st.markdown(f"- **{source}** — Page {page}")
 
     st.session_state.messages.append({"role": "assistant", "content": answer})
