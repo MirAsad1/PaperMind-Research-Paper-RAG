@@ -20,7 +20,7 @@ with st.sidebar:
     st.markdown("---")
 
     st.markdown("### 🤖 Model Info")
-    st.markdown("- **LLM:** - ")
+    st.markdown("- **LLM:** openai/gpt-oss-20b ")
     st.markdown("- **Provider:** Groq")
     st.markdown("- **Embeddings:** all-MiniLM-L6-v2")
     st.markdown("- **Vector Store:** ChromaDB")
