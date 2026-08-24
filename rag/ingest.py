@@ -43,6 +43,25 @@ def save_to_chromadb(chunks):
     print("Saved to ChromaDB!")
     return db
 
+def add_single_pdf(file_path):
+    """Ingest a single PDF and append it to the existing ChromaDB (no re-processing of old papers)"""
+    loader = PyMuPDFLoader(file_path)
+    docs = loader.load()
+    if not docs:
+        return 0
+
+    chunks = split_documents(docs)
+
+    embeddings = SentenceTransformerEmbeddings(model_name=EMBED_MODEL)
+    db = Chroma(
+        persist_directory=CHROMA_DIR,
+        embedding_function=embeddings,
+    )
+    db.add_documents(chunks)
+    db.persist()
+
+    print(f"Added {len(chunks)} chunks from {os.path.basename(file_path)}")
+    return len(chunks)
 
 def ingest():
     print("Starting ingestion...")
